@@ -40,7 +40,6 @@ function addTile() {
 
 	grid[x][y] = "2";
 
-	//adjust to keep running WHILE there's not a 2 at that point
 }
 
 
@@ -194,11 +193,11 @@ function combineTilesRight()
 	{
 			for(var r=0; r<grid[c].length; r++)
 			{
-				if(c !== 0  && grid[r][c] !== "x" && grid[r][c] === grid[r][c-1])
+				if(c !== 3  && grid[r][c] !== "x" && grid[r][c] === grid[r][c+1])
 				{
-						var tileNumber = (parseInt(grid[r][c-1]) * 2) + "";
-						grid[r][c] = tileNumber;
-						grid[r][c-1] = "x";
+						var tileNumber = (parseInt(grid[r][c+1]) * 2) + "";
+						grid[r][c+1] = tileNumber;
+						grid[r][c] = "x";
 				}
 			}
 	}
