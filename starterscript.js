@@ -74,23 +74,29 @@ document.onkeydown = function(e) {
     //to use triple equals sign
     if (e.keyCode == UP_ARROW) {
         // up arrow
-				moveTilesUp();
+
 				combineTilesUp();
+				moveTilesUp();
 
     }
     //double equals sign will convert it for us
     else if (e.keyCode == DOWN_ARROW) {
         // down arrow
+
+				combineTilesDown();
 				moveTilesDown();
+
     }
     else if (e.keyCode == LEFT_ARROW) {
        // left arrow
 
+			 combineTilesLeft();
 			 moveTilesLeft();
     }
     else if (e.keyCode == RIGHT_ARROW) {
        // right arrow
 
+			 combineTilesRight();
 			 moveTilesRight();
     }
 
@@ -112,12 +118,26 @@ function moveTilesUp()
                 grid[r-1][c] = grid[r][c];
                 grid[r][c] = "x";
             }
-
         }
-
     }
-
 }
+
+function combineTilesUp()
+{
+	for(var r=0; r < grid.length; r++)
+	{
+			for(var c=0; c<grid[r].length; c++)
+			{
+				if(r !== 0  && grid[r][c] !== "x" && grid[r][c] === grid[r-1][c])
+				{
+						var tileNumber = (parseInt(grid[r-1][c]) * 2) + "";
+						grid[r-1][c] = tileNumber;
+						grid[r][c] = "x";
+				}
+			}
+	}
+}
+
 
 function moveTilesDown()
 {
@@ -130,12 +150,26 @@ function moveTilesDown()
 							grid[r+1][c] = grid[r][c];
 							grid[r][c] = "x";
 					}
-
 			}
-
 	}
-
 }
+
+function combineTilesDown()
+{
+	for(var r=3; r >= 0; r--)
+	{
+			for(var c=0; c<grid[r].length; c++)
+			{
+				if(r !== 3  && grid[r][c] !== "x" && grid[r][c] === grid[r+1][c])
+				{
+						var tileNumber = (parseInt(grid[r+1][c]) * 2) + "";
+						grid[r+1][c] = tileNumber;
+						grid[r][c] = "x";
+				}
+			}
+	}
+}
+
 
 function moveTilesRight()
 {
@@ -154,6 +188,23 @@ function moveTilesRight()
 	}
 }
 
+function combineTilesRight()
+{
+	for(var c=3; c >= 0; c--)
+	{
+			for(var r=0; r<grid[c].length; r++)
+			{
+				if(c !== 0  && grid[r][c] !== "x" && grid[r][c] === grid[r][c-1])
+				{
+						var tileNumber = (parseInt(grid[r][c-1]) * 2) + "";
+						grid[r][c] = tileNumber;
+						grid[r][c-1] = "x";
+				}
+			}
+	}
+}
+
+
 function moveTilesLeft()
 {
 	for(var c=0; c < grid.length; c++)
@@ -171,11 +222,20 @@ function moveTilesLeft()
 	}
 }
 
-function combineTilesUp()
+function combineTilesLeft()
 {
-	if(r !== 0  && grid[r][c] !== "x" && parseInt(grid[r][c]) == parseInt(grid[r-1][c]))
+	for(var c=0; c < grid.length; c++)
 	{
-			grid[r-1][c] = grid[r][c];
-			grid[r][c] = parseInt(grid[r][c]) * 2;
+			for(var r=0; r<grid[c].length; r++)
+			{
+				if(c !== 0  && grid[r][c] !== "x" && grid[r][c] === grid[r][c-1])
+				{
+						var tileNumber = (parseInt(grid[r][c-1]) * 2) + "";
+						grid[r][c-1] = tileNumber;
+						grid[r][c] = "x";
+				}
+
+			}
+
 	}
 }
